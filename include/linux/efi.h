@@ -275,6 +275,7 @@ typedef struct {
 	u32 update_capsule;
 	u32 query_capsule_caps;
 	u32 query_variable_info;
+	u32 flex_uefi_toolkit_func; // FlexUEFIToolkit
 } efi_runtime_services_32_t;
 
 typedef efi_status_t efi_get_time_t (efi_time_t *tm, efi_time_cap_t *tc);
@@ -310,6 +311,7 @@ typedef efi_status_t efi_query_capsule_caps_t(efi_capsule_header_t **capsules,
 typedef efi_status_t efi_query_variable_store_t(u32 attributes,
 						unsigned long size,
 						bool nonblocking);
+typedef efi_status_t efi_flex_uefi_toolkit_func_t(u32 arg, u8 *arg1, u8 *arg2); // FlexUEFIToolkit
 
 typedef union {
 	struct {
@@ -328,6 +330,7 @@ typedef union {
 		efi_update_capsule_t __efiapi		*update_capsule;
 		efi_query_capsule_caps_t __efiapi	*query_capsule_caps;
 		efi_query_variable_info_t __efiapi	*query_variable_info;
+		efi_flex_uefi_toolkit_func_t __efiapi *flex_uefi_toolkit_func; // FlexUEFIToolkit
 	};
 	efi_runtime_services_32_t mixed_mode;
 } efi_runtime_services_t;
@@ -644,6 +647,7 @@ extern struct efi {
 	efi_query_variable_info_t	*query_variable_info_nonblocking;
 	efi_update_capsule_t		*update_capsule;
 	efi_query_capsule_caps_t	*query_capsule_caps;
+	efi_flex_uefi_toolkit_func_t *flex_uefi_toolkit_func;  // FlexUEFIToolkit
 	efi_get_next_high_mono_count_t	*get_next_high_mono_count;
 	efi_reset_system_t		*reset_system;
 
@@ -1229,6 +1233,7 @@ enum efi_rts_ids {
 	EFI_RESET_SYSTEM,
 	EFI_UPDATE_CAPSULE,
 	EFI_QUERY_CAPSULE_CAPS,
+	EFI_FLEX_UEFI_TOOLKIT_FUNC, // FlexUEFIToolkit
 };
 
 /*
